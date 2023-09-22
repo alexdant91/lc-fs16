@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div>
+    <div class="btn-box">
+      <div id="pageBtn"></div>
+      <div id="refreshBtn">
+        <select name="searchBy" id="searchBy">
+          <option value="title">title</option>
+          <option value="body">body</option>
+        </select>
+        <input type="search" name="search" id="search" placeholder="Cerca...">
+
+        <select name="orderBy" id="orderBy">
+          <option value="id">id</option>
+          <option value="userId">userId</option>
+          <option value="title">title</option>
+          <option value="body">body</option>
+        </select>
+
+        <select name="sort" id="sort">
+          <option value="asc">crescente</option>
+          <option value="desc">decrescente</option>
+        </select>
+
+        <select name="limit" id="limit">
+          <option value="10">10</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+        <button id="refresh">refresh</button>
+      </div>
+    </div>
+    <p>
+      page <span id="currentPage"></span> of <span id="totalPages"></span>
+    </p>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>userId</th>
+          <th>title</th>
+          <th>body</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
