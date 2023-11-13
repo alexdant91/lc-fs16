@@ -16,8 +16,12 @@ app.use(express.json());
 /**
  * @path /api
  */
-
 app.use("/api", require("./api"))
+
+/**
+ * @path /auth
+ */
+app.use("/auth", require("./auth"))
 
 db.connect();
 

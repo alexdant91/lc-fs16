@@ -37,8 +37,7 @@ const UserSchema = new Schema({
         unique: true,
         default: crypto.randomBytes(12).toString("hex"),
     },
-
-})
+}, { strict: true, timestamps: true, versionKey: false })
 
 const User = model("User", UserSchema);
 
