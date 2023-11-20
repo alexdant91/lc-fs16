@@ -2,13 +2,14 @@
 
 ## struttura dati 
 
-- users
-- products
-- categories
-- carts
-- cart products
-- promo codes
-- shippings
-- ratings
-- wishlists
-- wishlist products
+- [X] users
+- [ ] admin
+- [X] products
+- [X] categories
+- [ ] carts
+- [ ] cart products
+- [ ] promo codes
+- [ ] shippings
+- [ ] ratings
+- [ ] wishlists
+- [ ] wishlist products
