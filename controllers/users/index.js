@@ -32,7 +32,7 @@ const createNewUser = async (req, res) => {
     const user = (await new User(data).save()).toObject();
 
     const email_token = generateUserVerifyToken({
-      _id: user.id,
+      _id: user._id,
       evt: user.email_verification_token,
     });
 
