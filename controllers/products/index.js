@@ -44,24 +44,11 @@ const paginateAllProducts = async (req, res) => {
   const limit = req.query.limit || 25;
 
   try {
-    const _products = await Product.paginate({}, { page, limit, populate: ['categories'] });
+    const products = await Product.paginate({}, { page, limit, populate: ['categories'], lean: true });
 
-    const products = [..._products.docs].map((product) => {
-      if (product.discount > 0) {
-        product.final_price = product.price - (product.price * product.discount / 100);
-        console.log(product.final_price);
-      }
-      return product;
+    products.docs.forEach((product, index) => {
+      products.docs[index].final_price = product.discount > 0 ? product.price - (product.price * product.discount / 100) : product.price;
     });
-    // products.docs.forEach((product, index) => {
-    //   products.docs[index].final_price = product.discount > 0 ? product.price - (product.price * product.discount / 100) : product.price;
-    //   console.log(product.discount > 0 ? product.price - (product.price * product.discount / 100) : product.price)
-    // }
-
-    // for (let i = 0; i < products.docs.length; i++) {
-    //   const product = products.docs[i];
-    //   products.docs[i].final_price = product.discount > 0 ? product.price - (product.price * product.discount / 100) : product.price;
-    // }
 
     return res.status(200).json(products);
   } catch (error) {
