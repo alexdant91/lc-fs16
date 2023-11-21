@@ -24,6 +24,10 @@ const models = {
     Product: require("./models/Product"),
     Category: require("./models/Category"),
     Admin: require("./models/Admin"),
+    Cart: require("./models/Cart"),
+    CartProduct: require("./models/CartProduct"),
+    Shipping: require("./models/Shipping"),
+    PromoCode: require("./models/PromoCode"),
 } 
 
 module.exports = {

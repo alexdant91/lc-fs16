@@ -3,7 +3,7 @@
 ## struttura dati 
 
 - [X] users
-- [ ] admin
+- [X] admin
 - [X] products
 - [X] categories
 - [ ] carts

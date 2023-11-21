@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-const { generateHashPassword } = require("../../utilities/auth");
 const { Schema, model } = mongoose;
 
 const AdminSchema = new Schema({

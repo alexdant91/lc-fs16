@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const { outErrors } = require("../../utilities/errors");
-const { User } = require("../../db");
+const { User, Cart } = require("../../db");
 const {
   generateHashPassword,
   generateUserVerifyToken,
@@ -30,6 +30,10 @@ const createNewUser = async (req, res) => {
     data.password = generateHashPassword(data.password);
 
     const user = (await new User(data).save()).toObject();
+
+    await new Cart({
+      user: user._id
+    }).save();
 
     const email_token = generateUserVerifyToken({
       _id: user._id,
