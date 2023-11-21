@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User, Admin } = require("../db");
 const { verifyUserToken, verifyUserVerifyToken } = require("../utilities/auth");
 const { outErrors } = require("../utilities/errors");
 
@@ -69,7 +69,41 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
+const authAdmin = async (req, res, next) => {
+  const token =
+    req.headers?.authorization?.replace("Bearer ", "") ||
+    req.query.token ||
+    false;
+
+  if (!token) {
+    return res.status(403).json({ message: "Not authorized" });
+  }
+
+  try {
+    const decoded = verifyUserToken(token);
+
+    const admin = await Admin.findOne(
+      {
+        _id: decoded._id,
+        session_key: decoded.sk,
+      },
+      "-password -session_key",
+      { lean: true }
+    );
+
+    if (admin == null) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    req.admin = admin;
+    return next();
+  } catch (error) {
+    return outErrors(error, res);
+  }
+};
+
 module.exports = {
   authUser,
   verifyUser,
+  authAdmin,
 };

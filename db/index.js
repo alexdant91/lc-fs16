@@ -23,6 +23,7 @@ const models = {
     User: require("./models/User"),
     Product: require("./models/Product"),
     Category: require("./models/Category"),
+    Admin: require("./models/Admin"),
 } 
 
 module.exports = {
