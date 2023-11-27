@@ -1,11 +1,11 @@
 # sistema carrello
 
-## struttura dati 
+## struttura dati
 
-- [X] users
-- [X] admin
-- [X] products
-- [X] categories
+- [x] users
+- [x] admin
+- [x] products
+- [x] categories
 - [ ] carts
 - [ ] cart products
 - [ ] promo codes
@@ -13,3 +13,22 @@
 - [ ] ratings
 - [ ] wishlists
 - [ ] wishlist products
+- [ ] orders
+
+- valutazione 0-5,
+- associate al prodotto
+- associate al utente
+- content
+-
+
+step
+1.creo modello su db
+2.registro index db
+3creo route api
+4.registro route index api
+5.creo controller - uno per una singola recensione - uno per tutte le recensioni impaginate per uno specifico prodotto - una per creare una recensione 6. inserisco controller nella route di api subito dopo authUser.
+
+rating: 4
+ratingCount: 90
+
+newRating = ((ratingCount \* rating) + addedRating) / (ratingCount + 1)
