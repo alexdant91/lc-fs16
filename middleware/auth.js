@@ -1,5 +1,9 @@
 const { User, Admin } = require("../db");
-const { verifyUserToken, verifyUserVerifyToken } = require("../utilities/auth");
+const {
+  verifyUserToken,
+  verifyUserVerifyToken,
+  verifyUserPassToken,
+} = require("../utilities/auth");
 const { outErrors } = require("../utilities/errors");
 
 const authUser = async (req, res, next) => {
@@ -102,8 +106,43 @@ const authAdmin = async (req, res, next) => {
   }
 };
 
+const authUserRecoveryPassword = async (req, res, next) => {
+  const token =
+    req.headers?.authorization?.replace("Bearer ", "") ||
+    req.query.token ||
+    false;
+
+  if (!token) {
+    return res.status(403).json({ message: "Not authorized" });
+  }
+
+  try {
+    const decoded = verifyUserPassToken(token);
+
+    const user = await User.findOne(
+      {
+        _id: decoded._id,
+        is_active: true,
+        is_verified: true,
+      },
+      "-password -session_key -email_verification_token",
+      { lean: true }
+    );
+
+    if (user == null) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    req.user = user;
+    return next();
+  } catch (error) {
+    return outErrors(error, res);
+  }
+};
+
 module.exports = {
   authUser,
   verifyUser,
   authAdmin,
+  authUserRecoveryPassword,
 };

@@ -32,6 +32,21 @@ const verifyUserVerifyToken = (token) => {
   return decoded;
 };
 
+const generateUserPassToken = (payload) => {
+  return jwt.sign(
+    { ...payload, scope: "RECOVERY_PASSWORD_PROCESS" },
+    process.env.SERVER_PRIVATE_KEY
+  );
+};
+
+const verifyUserPassToken = (token) => {
+  const decoded = jwt.verify(token, process.env.SERVER_PRIVATE_KEY);
+  if (decoded.scope !== "RECOVERY_PASSWORD_PROCESS") {
+    throw new Error("invalid token");
+  }
+  return decoded;
+};
+
 module.exports = {
   generateHashPassword,
   compareHashPassword,
@@ -39,4 +54,6 @@ module.exports = {
   verifyUserToken,
   generateUserVerifyToken,
   verifyUserVerifyToken,
+  generateUserPassToken,
+  verifyUserPassToken,
 };
