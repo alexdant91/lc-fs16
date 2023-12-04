@@ -1,4 +1,4 @@
-const { User, Admin } = require("../db");
+const { User, Admin, Cart } = require("../db");
 const {
   verifyUserToken,
   verifyUserVerifyToken,
@@ -34,6 +34,10 @@ const authUser = async (req, res, next) => {
       return res.status(403).json({ message: "Not authorized" });
     }
 
+    const cart = await Cart.findOne({ user: user._id }, '_id', { lean: true });
+
+    user.cart = cart._id;
+    
     req.user = user;
     return next();
   } catch (error) {

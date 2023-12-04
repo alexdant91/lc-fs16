@@ -6,11 +6,11 @@
 - [x] admin
 - [x] products
 - [x] categories
-- [ ] carts
-- [ ] cart products
+- [x] carts
+- [x] cart products
 - [ ] promo codes
 - [ ] shippings
-- [ ] ratings
+- [x] ratings
 - [ ] wishlists
 - [ ] wishlist products
 - [ ] orders

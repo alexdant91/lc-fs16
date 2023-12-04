@@ -1,10 +1,8 @@
 const Joi = require("joi");
 const fs = require("fs");
-const uuid = require("uuid");
 const path = require("path");
 const { outErrors } = require("../../utilities/errors");
 const { Product } = require("../../db");
-const { processDataType } = require("../../utilities/images");
 const { uploadFile } = require("../../utilities/files");
 
 /**

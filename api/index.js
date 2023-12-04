@@ -33,4 +33,9 @@ app.use("/categories", require("./routes/categories"));
  */
 app.use("/ratings", require("./routes/ratings"));
 
+/**
+ * @path /api/carts
+ */
+app.use("/carts", require("./routes/carts"));
+
 module.exports = app;
