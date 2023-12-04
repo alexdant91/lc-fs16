@@ -5,6 +5,7 @@ const path = require("path");
 const { outErrors } = require("../../utilities/errors");
 const { Product } = require("../../db");
 const { processDataType } = require("../../utilities/images");
+const { uploadFile } = require("../../utilities/files");
 
 /**
  * Create new product
@@ -31,23 +32,11 @@ const createNewProduct = async (req, res) => {
     const _product = new Product(data);
 
     if (data.cover && data.cover.startsWith("data:")) {
-      const { file_ext, file_enc, data_str } = processDataType(data.cover);
+      _product.cover = uploadFile('cover', data, _product._id.toString());
+    }
 
-      const cover_name = `${uuid.v4().replace("-", "")}.${file_ext}`;
-      const cover_path = path.join(
-        __dirname,
-        "../../static/images/products",
-        _product._id,
-        "cover"
-      );
-
-      if (!fs.existsSync(cover_path)) {
-        fs.mkdirSync(cover_path);
-      }
-
-      fs.writeFileSync(`${cover_path}/${cover_name}`, data_str, file_enc);
-
-      data.cover = `${process.env.SERVER_HOST}${process.env.SERVER_STATIC}/images/products/${_product._id}/cover/${cover_name}`;
+    if (Array.isArray(data.images) && !data.images.some((image) => !image.startsWith("data:"))) {
+      _product.images = uploadFile('images', data, _product._id.toString());
     }
 
     const product = (await _product.save()).toObject();
@@ -156,6 +145,8 @@ const deleteProductById = async (req, res) => {
 
   try {
     await Product.deleteOne({ _id: product_id });
+
+    fs.rmSync(path.join(__dirname, '../../public/images/products', product_id), { recursive: true, force: true });
 
     return res.status(201).json({ message: "Product deleted" });
   } catch (error) {
