@@ -8,18 +8,12 @@
 - [x] categories
 - [x] carts
 - [x] cart products
-- [ ] promo codes
-- [ ] shippings
+- [x] promo codes
+- [x] shippings
 - [x] ratings
 - [ ] wishlists
 - [ ] wishlist products
 - [ ] orders
-
-- valutazione 0-5,
-- associate al prodotto
-- associate al utente
-- content
--
 
 step
 1.creo modello su db

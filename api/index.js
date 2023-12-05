@@ -38,4 +38,14 @@ app.use("/ratings", require("./routes/ratings"));
  */
 app.use("/carts", require("./routes/carts"));
 
+/**
+ * @path /api/shippings
+ */
+app.use("/shippings", require("./routes/shippings"));
+
+/**
+ * @path /api/promo-codes
+ */
+app.use("/promo-codes", require("./routes/promo-codes"));
+
 module.exports = app;

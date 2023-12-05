@@ -30,11 +30,14 @@ const createNewProduct = async (req, res) => {
     const _product = new Product(data);
 
     if (data.cover && data.cover.startsWith("data:")) {
-      _product.cover = uploadFile('cover', data, _product._id.toString());
+      _product.cover = uploadFile("cover", data, _product._id.toString());
     }
 
-    if (Array.isArray(data.images) && !data.images.some((image) => !image.startsWith("data:"))) {
-      _product.images = uploadFile('images', data, _product._id.toString());
+    if (
+      Array.isArray(data.images) &&
+      !data.images.some((image) => !image.startsWith("data:"))
+    ) {
+      _product.images = uploadFile("images", data, _product._id.toString());
     }
 
     const product = (await _product.save()).toObject();
@@ -144,9 +147,12 @@ const deleteProductById = async (req, res) => {
   try {
     await Product.deleteOne({ _id: product_id });
 
-    fs.rmSync(path.join(__dirname, '../../public/images/products', product_id), { recursive: true, force: true });
+    fs.rmSync(
+      path.join(__dirname, "../../public/images/products", product_id),
+      { recursive: true, force: true }
+    );
 
-    return res.status(201).json({ message: "Product deleted" });
+    return res.status(200).json({ message: "Product deleted" });
   } catch (error) {
     return outErrors(error, res);
   }
