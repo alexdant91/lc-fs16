@@ -11,8 +11,8 @@
 - [x] promo codes
 - [x] shippings
 - [x] ratings
-- [ ] wishlists
-- [ ] wishlist products
+- [x] wishlists
+- [x] wishlist products
 - [ ] orders
 
 step
