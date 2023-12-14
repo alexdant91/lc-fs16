@@ -48,4 +48,9 @@ app.use("/shippings", require("./routes/shippings"));
  */
 app.use("/promo-codes", require("./routes/promo-codes"));
 
+/**
+ * @path /api/wishlists
+ */
+app.use("/wishlists", require("./routes/wishlists"));
+
 module.exports = app;

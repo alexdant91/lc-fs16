@@ -29,6 +29,8 @@ const models = {
   Shipping: require("./models/Shipping"),
   PromoCode: require("./models/PromoCode"),
   Rating: require("./models/Rating"),
+  Wishlist: require("./models/Wishlist"),
+  WishlistProduct: require("./models/WishlistProduct"),
 };
 
 module.exports = {
